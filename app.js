@@ -819,8 +819,10 @@ function renderLearnSection() {
   ensureSelectedSet();
   clampLearnIndex();
   const learnGrid = document.querySelector(".learn-grid");
+  const isMobileBrowserOpen = isMobileLayout() && state.learn.showSetBrowser;
   learnGrid.classList.toggle("mobile-browser-hidden", isMobileLayout() && !state.learn.showSetBrowser);
-  learnGrid.classList.toggle("mobile-browser-open", isMobileLayout() && state.learn.showSetBrowser);
+  learnGrid.classList.toggle("mobile-browser-open", isMobileBrowserOpen);
+  document.body.classList.toggle("modal-open", isMobileBrowserOpen);
   document.querySelector("#toggleSetBrowserButton").textContent = state.learn.showSetBrowser ? "학습으로 돌아가기" : "세트 바꾸기";
 
   renderChips("#learnSetFilters", learnSetFilterOptions, state.learn.setFilter, (id) => {
@@ -1199,6 +1201,11 @@ function attachEvents() {
     render();
   });
 
+  document.querySelector("#closeSetBrowserButton").addEventListener("click", () => {
+    state.learn.showSetBrowser = false;
+    render();
+  });
+
   document.querySelector("#setSearch").addEventListener("input", (event) => {
     state.learn.query = event.target.value;
     state.learn.currentIndex = 0;
@@ -1265,6 +1272,7 @@ function attachEvents() {
     if (!isMobileLayout()) {
       state.learn.showSetBrowser = false;
     }
+    document.body.classList.remove("modal-open");
     render();
   });
 }

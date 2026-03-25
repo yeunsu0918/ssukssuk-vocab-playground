@@ -6,7 +6,7 @@
     <title>쑥쑥 단어 놀이터</title>
     <meta
       name="description"
-      content="하루치 단어 세트로 카드 학습, 퀴즈, 복습을 나눠서 익히는 아이용 영어 단어장 앱"
+      content="카드로 배우고 퀴즈로 복습하는 아이용 영어 단어 놀이터"
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -39,12 +39,12 @@
         <section class="app-section is-active" id="learnSection" aria-labelledby="learnSectionTitle">
           <div class="learn-grid">
             <aside class="panel set-panel">
-                <div class="section-heading">
-                  <div>
-                    <p class="eyebrow">Learn</p>
-                    <h2 id="learnSectionTitle">세트 고르기</h2>
-                  </div>
-                <p class="section-copy"></p>
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Learn</p>
+                  <h2 id="learnSectionTitle">세트 고르기</h2>
+                </div>
+                <button class="sheet-close-btn mobile-only-inline" id="closeSetBrowserButton" type="button">닫기</button>
               </div>
 
               <label class="field-label" for="setSearch">세트 찾기</label>
@@ -78,7 +78,7 @@
                 </button>
                 <button class="flashcard" id="flashcard" type="button">
                   <span class="card-face card-front">
-                    <span class="face-label">English</span>
+                    <span class="face-label">영어</span>
                     <span class="face-text" id="wordText">단어를 골라 주세요</span>
                   </span>
                   <span class="card-face card-back">
@@ -108,7 +108,6 @@
                   <p class="eyebrow">Quiz</p>
                   <h2 id="quizSectionTitle">문제 설정</h2>
                 </div>
-                <p class="section-copy"></p>
               </div>
 
               <div class="settings-group">
@@ -167,7 +166,6 @@
                   <p class="eyebrow">Review</p>
                   <h2 id="reviewSectionTitle">다시 보기 노트</h2>
                 </div>
-                <p class="section-copy"></p>
               </div>
 
               <div class="summary-stats" id="reviewStats"></div>
