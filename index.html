@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>쑥쑥 단어 놀이터</title>
+    <meta
+      name="description"
+      content="하루치 단어 세트로 카드 학습, 퀴즈, 복습을 나눠서 익히는 아이용 영어 단어장 앱"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Noto+Sans+KR:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-glow page-glow-left"></div>
+    <div class="page-glow page-glow-right"></div>
+
+    <div class="app-shell">
+      <header class="app-header panel">
+        <div class="brand-block">
+          <div class="brand-badge">ABC</div>
+          <div>
+            <p class="eyebrow">Word Playground</p>
+            <h1>쑥쑥 단어 놀이터</h1>
+            <p class="app-subtitle" id="appSubtitle">단어를 불러오는 중...</p>
+          </div>
+        </div>
+        <div class="header-stats" id="headerStats"></div>
+      </header>
+
+      <nav class="section-nav panel" id="sectionTabs" aria-label="학습 영역 선택"></nav>
+
+      <main class="section-host">
+        <section class="app-section is-active" id="learnSection" aria-labelledby="learnSectionTitle">
+          <div class="learn-grid">
+            <aside class="panel set-panel">
+                <div class="section-heading">
+                  <div>
+                    <p class="eyebrow">Learn</p>
+                    <h2 id="learnSectionTitle">세트 고르기</h2>
+                  </div>
+                <p class="section-copy"></p>
+              </div>
+
+              <label class="field-label" for="setSearch">세트 찾기</label>
+              <input id="setSearch" type="search" placeholder="DAY 01, 복습, 누적..." />
+
+              <div class="chip-row" id="learnSetFilters"></div>
+              <div class="set-list" id="learnSetList"></div>
+            </aside>
+
+            <section class="panel study-panel">
+              <div class="study-head">
+                <div>
+                  <p class="eyebrow" id="learnDeckLabel">DAY</p>
+                  <h2 id="learnDeckTitle">세트를 골라 주세요</h2>
+                  <p class="section-copy" id="learnDeckCopy"></p>
+                </div>
+                <div class="study-head-actions">
+                  <button class="ghost-btn mobile-only-inline" id="toggleSetBrowserButton" type="button">세트 바꾸기</button>
+                  <div class="study-progress">
+                    <span id="learnProgressText">0 / 0</span>
+                    <div class="progress-track">
+                      <div class="progress-value" id="learnProgressValue"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flashcard-shell">
+                <button class="audio-btn" id="audioButton" type="button" aria-label="발음 듣기">
+                  듣기
+                </button>
+                <button class="flashcard" id="flashcard" type="button">
+                  <span class="card-face card-front">
+                    <span class="face-label">English</span>
+                    <span class="face-text" id="wordText">단어를 골라 주세요</span>
+                  </span>
+                  <span class="card-face card-back">
+                    <span class="face-label">뜻</span>
+                    <span class="face-text meaning-text" id="meaningText">뜻이 여기에 보여요</span>
+                  </span>
+                </button>
+              </div>
+
+              <div class="action-row">
+                <button class="ghost-btn" id="prevButton" type="button">이전</button>
+                <button class="ghost-btn accent" id="flipButton" type="button">뜻 보기</button>
+                <button class="ghost-btn success" id="knownButton" type="button">외웠어요</button>
+                <button class="ghost-btn" id="nextButton" type="button">다음</button>
+              </div>
+
+              <p class="helper-text" id="learnHelperText"></p>
+            </section>
+          </div>
+        </section>
+
+        <section class="app-section" id="quizSection" aria-labelledby="quizSectionTitle">
+          <div class="quiz-layout">
+            <section class="panel quiz-settings-panel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Quiz</p>
+                  <h2 id="quizSectionTitle">문제 설정</h2>
+                </div>
+                <p class="section-copy"></p>
+              </div>
+
+              <div class="settings-group">
+                <span class="field-label">출제 범위</span>
+                <div class="chip-row" id="quizScopeFilters"></div>
+              </div>
+
+              <div class="settings-group">
+                <span class="field-label">문제 형식</span>
+                <div class="chip-row" id="quizTypeFilters"></div>
+              </div>
+
+              <div class="settings-group">
+                <span class="field-label">문제 방향</span>
+                <div class="chip-row" id="quizDirectionFilters"></div>
+              </div>
+
+              <div class="action-row">
+                <button class="soft-btn" id="restartQuizButton" type="button">처음부터</button>
+                <button class="ghost-btn" id="nextQuizButton" type="button">다음 문제</button>
+              </div>
+            </section>
+
+            <section class="panel quiz-stage-panel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow" id="quizScopeLabel">현재 세트</p>
+                  <h2 id="quizTitle">퀴즈 준비 중</h2>
+                </div>
+                <p class="section-copy" id="quizScopeCopy"></p>
+              </div>
+
+              <div class="quiz-session-meta" id="quizSessionMeta"></div>
+              <div class="quiz-question" id="quizQuestion">문제를 불러오는 중...</div>
+              <form class="subjective-form hidden" id="subjectiveForm">
+                <input
+                  class="subjective-input"
+                  id="subjectiveInput"
+                  type="text"
+                  autocomplete="off"
+                  placeholder="정답을 직접 써 보세요"
+                />
+                <button class="soft-btn" type="submit">정답 확인</button>
+              </form>
+              <div class="quiz-choices" id="quizChoices"></div>
+              <div class="quiz-feedback" id="quizFeedback"></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="app-section" id="reviewSection" aria-labelledby="reviewSectionTitle">
+          <div class="review-layout">
+            <section class="panel review-summary-panel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Review</p>
+                  <h2 id="reviewSectionTitle">다시 보기 노트</h2>
+                </div>
+                <p class="section-copy"></p>
+              </div>
+
+              <div class="summary-stats" id="reviewStats"></div>
+
+              <div class="settings-group">
+                <span class="field-label">복습 범위</span>
+                <div class="chip-row" id="reviewFilters"></div>
+              </div>
+
+              <label class="inline-field hidden" id="reviewDateField">
+                <span class="field-label">날짜 선택</span>
+                <input id="reviewDateInput" type="date" />
+              </label>
+
+              <div class="action-row">
+                <button class="soft-btn" id="startReviewQuizButton" type="button">지금 보이는 오답 퀴즈</button>
+                <button class="ghost-btn" id="clearWrongButton" type="button">오답노트 비우기</button>
+              </div>
+            </section>
+
+            <section class="panel review-list-panel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow" id="reviewListLabel">Wrong Note</p>
+                  <h2>오답 카드</h2>
+                </div>
+                <p class="section-copy" id="reviewSummaryCopy"></p>
+              </div>
+
+              <div class="wrong-list" id="reviewWrongList"></div>
+            </section>
+          </div>
+        </section>
+      </main>
+
+      <nav class="bottom-nav panel" id="bottomTabs" aria-label="모바일 학습 탭"></nav>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
