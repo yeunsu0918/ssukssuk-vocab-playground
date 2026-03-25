@@ -978,20 +978,31 @@ input[type="date"],
     flex: 1 1 auto;
     max-height: none;
     overflow: auto;
+    padding-right: 2px;
+    grid-template-columns: 1fr;
   }
 
   .set-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px;
+    gap: 10px;
   }
 
   .set-item {
-    min-height: 60px;
-    padding: 12px 13px;
+    min-height: 84px;
+    padding: 14px;
   }
 
   .set-item-main {
     gap: 10px;
+  }
+
+  .set-badge {
+    padding: 7px 12px;
+    font-size: 0.84rem;
+  }
+
+  .set-title {
+    font-size: 1.2rem;
   }
 
   .set-list,
@@ -1002,5 +1013,16 @@ input[type="date"],
   .bottom-nav .nav-tab {
     min-height: 50px;
     border-radius: 16px;
+  }
+}
+
+@media (max-width: 560px) {
+  .set-list {
+    grid-template-columns: 1fr;
+  }
+
+  .learn-grid.mobile-browser-open .set-panel {
+    top: 74px;
+    bottom: 88px;
   }
 }
